@@ -1,14 +1,14 @@
-default: release
+default: app
 
 clean:
-	rm -rf build
-	rm -rf cache
+	rm -rf build/release
+	rm -rf build/.nw-cache
 
-release:
-	node scripts/build-release.js
+app:
+	node scripts/build-app.js
 
 changelog:
 	node scripts/generate-changelog.js
 
-.PHONY:  default clean release changelog
-.SILENT: default clean release changelog
+.PHONY:  default clean app changelog
+.SILENT: default clean app changelog

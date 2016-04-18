@@ -1,4 +1,4 @@
-/build
-/cache
+/build/.nw-cache
+/build/release
 /node_modules
 /npm-debug.log

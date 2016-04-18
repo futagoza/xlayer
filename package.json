@@ -1,8 +1,6 @@
 {
   "private": true,
   "dependencies": {
-    "nw-builder": "2.2.0",
-    "conventional-changelog": "1.1.0",
-    "fs-extra": "0.28.0"
+    "nw-builder": "2.2.0"
   }
 }

@@ -1,8 +1,8 @@
 var fs = require('fs');
-var join = require('path').join;
-var argv = process.argv.slice(2);
+var utils = require('./utils');
+var onArg = utils.onArg;
 
-var file = join(__dirname, '..', 'app', 'package.json');
+var file = utils.buildPath('app/package.json');
 var xlayer = JSON.parse(fs.readFileSync(file));
 var semver = xlayer.version.split('.');
 var bumped = false;
@@ -12,12 +12,9 @@ function bump ( i ) {
   bumped = true;
 }
 
-if ( argv.indexOf('-m') !== -1 ) bump(0);
-
-if ( argv.indexOf('-r') !== -1 ) bump(1);
-
-if ( argv.indexOf('-p') !== -1 ) bump(2);
-
+onArg(['-m', '--major'], ()=> bump(0));
+onArg(['-r', '--release', '--minor'], ()=> bump(1));
+onArg(['-p', '--patch'], ()=> bump(2));
 if ( !bumped ) bump(2);
 
 xlayer.version = semver.join('.');

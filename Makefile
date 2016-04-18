@@ -7,8 +7,11 @@ clean:
 app:
 	node scripts/build-app.js
 
+bump:
+	node scripts/bump-version.js
+
 changelog:
 	node scripts/generate-changelog.js
 
-.PHONY:  default clean app changelog
-.SILENT: default clean app changelog
+.PHONY:  default clean app bump changelog
+.SILENT: default clean app bump changelog

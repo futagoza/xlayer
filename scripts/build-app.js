@@ -1,0 +1,43 @@
+'use strict'
+
+const { define, onArg } = require('./utils/cli')
+const { isFile, join } = require('./utils/fs')
+const { rollup } = require('rollup')
+const json = require('rollup-plugin-json')
+const babel = require('rollup-plugin-babel')
+
+const PRODUCTION = onArg('PRODUCTION')
+const resolve = ( path ) => {
+  path = join(__dirname, '..', 'src', 'app', path)
+  if ( isFile(path) ) return path
+}
+
+rollup({
+  entry: `bootstrap/${ PRODUCTION ? 'production' : 'development' }.js`,
+  plugins: [
+    json(),
+    babel({
+      babelrc: false,
+      exclude: 'node_modules/**',
+      presets: ["stage-0"],
+      compact: PRODUCTION ? true : 'auto',
+      minified: PRODUCTION === true,
+      comments: PRODUCTION !== true
+    }),
+    {
+      resolveId ( importee ) {
+        if ( /\0/.test(importee) ) return null
+        return resolve(importee) || resolve(importee + '.js') || resolve(importee + '/index.js')
+      }
+    }
+  ]
+})
+.then(bundle => {
+  bundle.write({
+    sourceMap: PRODUCTION !== true,
+    banner: 'if (typeof global === \'undefined\') global = this',
+    dest: 'assets/js/xlayer.js',
+    format: 'iife',
+    moduleName: 'xlayer'
+  });
+})

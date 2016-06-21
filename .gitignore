@@ -1,4 +1,3 @@
-/build/.nw-cache
-/build/release
+/build
 /node_modules
 /npm-debug.log

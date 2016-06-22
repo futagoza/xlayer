@@ -1,12 +1,14 @@
 'use strict'
 
-const { define, onArg } = require('./utils/cli')
+const { onArg } = require('./utils/cli')
 const { isFile, join } = require('./utils/fs')
 const { rollup } = require('rollup')
 const json = require('rollup-plugin-json')
 const babel = require('rollup-plugin-babel')
 
 const PRODUCTION = onArg('PRODUCTION')
+const DEBUG_BUILD = !PRODUCTION && onArg('DEBUG')
+
 const resolve = ( path ) => {
   path = join(__dirname, '..', 'src', 'app', path)
   if ( isFile(path) ) return path
@@ -21,8 +23,8 @@ rollup({
       exclude: 'node_modules/**',
       presets: ["stage-0"],
       compact: PRODUCTION ? true : 'auto',
-      minified: PRODUCTION === true,
-      comments: PRODUCTION !== true
+      minified: PRODUCTION,
+      comments: DEBUG_BUILD
     }),
     {
       resolveId ( importee ) {
@@ -34,7 +36,7 @@ rollup({
 })
 .then(bundle => {
   bundle.write({
-    sourceMap: PRODUCTION !== true,
+    sourceMap: DEBUG_BUILD,
     banner: 'if (typeof global === \'undefined\') global = this',
     dest: 'assets/js/xlayer.js',
     format: 'iife',

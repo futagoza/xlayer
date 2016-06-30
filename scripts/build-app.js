@@ -43,3 +43,12 @@ rollup({
     moduleName: 'xlayer'
   })
 })
+.catch(err => {
+  console.log()
+  if ( err.file && err.loc ) {
+    let loc = err.loc
+    console.log(`File: ${ err.file }`)
+    console.log(`Location: Line ${ loc.line }, Column ${ loc.column }`)
+  }
+  console.log(err.stack)
+})

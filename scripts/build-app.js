@@ -37,9 +37,9 @@ rollup({
 .then(bundle => {
   bundle.write({
     sourceMap: DEBUG_BUILD,
-    banner: 'if (typeof global === \'undefined\') global = this',
+    banner: 'if (typeof global === \'undefined\') global = this;',
     dest: 'assets/js/xlayer.js',
     format: 'iife',
     moduleName: 'xlayer'
-  });
+  })
 })

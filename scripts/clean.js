@@ -7,7 +7,6 @@ define(task => {
 
   task('default', () => {
     task('dist')
-    task('nwjs')
     task('app')
   })
 
@@ -16,8 +15,8 @@ define(task => {
     remove('assets/js/xlayer.js.map')
   })
 
-  task('nwjs', () => {})
-
-  task('dist', () => {})
+  task('dist', () => {
+    remove('build')
+  })
 
 })

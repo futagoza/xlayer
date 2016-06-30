@@ -1,7 +1,7 @@
 {
   "name": "xlayer",
   "version": "0.3.0-alpha",
-  "A simple editor with an even simpler plugin based system for extensions"
+  "description": "A simple editor with an even simpler plugin based system for extensions",
   "main": "js/xlayer.js",
   "window": {
     "id": "futagozaryuu.xLayer",

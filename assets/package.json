@@ -1,0 +1,19 @@
+{
+  "name": "xlayer",
+  "version": "0.3.0-alpha",
+  "A simple editor with an even simpler plugin based system for extensions"
+  "main": "js/xlayer.js",
+  "window": {
+    "id": "futagozaryuu.xLayer",
+    "title": "xLayer",
+    "width": 640,
+    "height": 480,
+    "icon": "images/logo.png",
+    "position": "mouse",
+    "min_width": 320,
+    "min_height": 200,
+    "resizable": true,
+    "frame": false,
+    "show": false
+  }
+}
